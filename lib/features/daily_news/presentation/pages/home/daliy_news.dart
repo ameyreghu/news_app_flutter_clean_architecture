@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutternews/core/constants/constants.dart';
 import 'package:flutternews/features/daily_news/presentation/bloc/article/remote_article_bloc.dart';
 import 'package:flutternews/features/daily_news/presentation/widgets/article_tile.dart';
+import 'package:gap/gap.dart';
 
 class DaliyNews extends StatelessWidget {
   const DaliyNews({super.key});
@@ -30,11 +31,17 @@ class DaliyNews extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      DropdownButton(
-                          hint: const Text('Category'),
+                      DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            hintText: 'Category',
+                          ),
+                          borderRadius: BorderRadius.circular(10),
                           value: state.currentCategory,
                           items: categories
                               .map(
@@ -47,9 +54,15 @@ class DaliyNews extends StatelessWidget {
                               bloc.add(ChangeCategoryEvent(value));
                             }
                           }),
-                      DropdownButton(
-                          hint: const Text('Country'),
+                      const Gap(10),
+                      DropdownButtonFormField(
                           value: state.currentCountry,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            hintText: 'Country',
+                          ),
                           items: countryCodes
                               .map(
                                 (e) =>
